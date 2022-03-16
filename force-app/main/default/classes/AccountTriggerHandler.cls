@@ -6,12 +6,6 @@ public class AccountTriggerHandler {
         }
     }
 
-    public void onBeforeUpdate(List<Account> accounts){
-        for(Account acc : accounts){
-            validaCPFCNPJ(acc);
-        }
-    }
-
     public void onAfterInsert(List<Account> accounts){
         Id parceiro_RT_id = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Parceiro').getRecordTypeId();
         Id consumidorFinal_RT_id = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Consumidor_final').getRecordTypeId();
@@ -25,6 +19,7 @@ public class AccountTriggerHandler {
                 opp.Name = acc.Name + ' - opp Parceiro';
                 opp.CloseDate = System.today().addDays(30);
                 opp.StageName = 'Qualification';
+                opp.AccountId = acc.Id;
                 opps.add(opp);
             }
 

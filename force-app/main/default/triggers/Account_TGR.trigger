@@ -1,4 +1,4 @@
-trigger Account_TGR on Account (before insert, before update, after insert) {
+trigger Account_TGR on Account (before insert, after insert) {
 
     AccountTriggerHandler handler = new AccountTriggerHandler();
 
@@ -9,12 +9,6 @@ trigger Account_TGR on Account (before insert, before update, after insert) {
 
         if(Trigger.isBefore){
             handler.onBeforeInsert(Trigger.new);
-        }
-    }
-
-    if(Trigger.isUpdate){
-        if(Trigger.isBefore){
-            handler.onBeforeUpdate(Trigger.new);
         }
     }
 
